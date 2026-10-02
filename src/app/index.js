@@ -1,4 +1,3 @@
-import { useMemo, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import ScreenLayout from '../../components/ScreenLayout';
@@ -6,31 +5,17 @@ import ScreenTitle from '../../components/ScreenTitle';
 import TrailSearchControls from '../../components/TrailSearchControls';
 import TrailCardList from '../../components/TrailCardList';
 import IconNavigation from '../../components/navigation/IconNavigation';
-
-// TEMPORARY PLACEHOLDER DATA:
-// Replace this array with the shared trail data source when the TrailCard
-// component is ready.
-const temporaryTrails = [
-  { id: '1', name: 'Pine Ridge Loop', miles: 2.4, hours: 1, difficulty: 'Easy', isSaved: true },
-  { id: '2', name: 'Potawatomi Trail', miles: 5.2, hours: 2.5, difficulty: 'Moderate' },
-  { id: '3', name: 'Brighton Ridge Trail', miles: 8.1, hours: 4, difficulty: 'Hard' },
-];
+import { useTrailFilter, useTrails } from '../../data/TrailsContext';
 
 export default function HomePage() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedDifficulty, setSelectedDifficulty] = useState('All');
-
-  const filteredTrails = useMemo(() => {
-    const normalizedQuery = searchQuery.trim().toLowerCase();
-
-    return temporaryTrails.filter((trail) => {
-      const matchesSearch = trail.name.toLowerCase().includes(normalizedQuery);
-      const matchesDifficulty =
-        selectedDifficulty === 'All' || trail.difficulty === selectedDifficulty;
-
-      return matchesSearch && matchesDifficulty;
-    });
-  }, [searchQuery, selectedDifficulty]);
+  const { trails, isLoading, toggleSaved } = useTrails();
+  const {
+    filteredTrails,
+    searchQuery,
+    setSearchQuery,
+    selectedDifficulty,
+    setSelectedDifficulty,
+  } = useTrailFilter(trails);
 
   return (
     <ScreenLayout footer={<IconNavigation />}>
@@ -44,7 +29,11 @@ export default function HomePage() {
             onDifficultyChange={setSelectedDifficulty}
           />
         </View>
-        <TrailCardList trails={filteredTrails} />
+        <TrailCardList
+          trails={filteredTrails}
+          isLoading={isLoading}
+          onToggleSaved={toggleSaved}
+        />
       </View>
     </ScreenLayout>
   );

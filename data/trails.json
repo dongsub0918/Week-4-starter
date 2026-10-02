@@ -1,0 +1,74 @@
+[
+  {
+    "id": "1",
+    "name": "Pine Ridge Loop",
+    "location": "Pinckney Recreation Area, MI",
+    "miles": 2.4,
+    "hours": 1,
+    "difficulty": "Easy",
+    "elevationGainFt": 180,
+    "description": "A short, shaded loop through red pine stands with a gentle climb to a lakeside overlook. Great for a quick morning walk.",
+    "imageUrl": null,
+    "isSaved": true
+  },
+  {
+    "id": "2",
+    "name": "Potawatomi Trail",
+    "location": "Pinckney Recreation Area, MI",
+    "miles": 5.2,
+    "hours": 2.5,
+    "difficulty": "Moderate",
+    "elevationGainFt": 620,
+    "description": "Rolling hardwood forest and glacial lakes on a well-marked singletrack shared with mountain bikers. Expect a few steep, rooty sections.",
+    "imageUrl": null,
+    "isSaved": false
+  },
+  {
+    "id": "3",
+    "name": "Brighton Ridge Trail",
+    "location": "Brighton Recreation Area, MI",
+    "miles": 8.1,
+    "hours": 4,
+    "difficulty": "Hard",
+    "elevationGainFt": 1140,
+    "description": "A long, hilly route with repeated ridge climbs and sandy descents. Bring plenty of water; there is no shade on the southern half.",
+    "imageUrl": null,
+    "isSaved": false
+  },
+  {
+    "id": "4",
+    "name": "Mill Creek Path",
+    "location": "Dexter, MI",
+    "miles": 2.1,
+    "hours": 1,
+    "difficulty": "Easy",
+    "elevationGainFt": 60,
+    "description": "A flat, crushed-gravel path along Mill Creek with boardwalk wetland crossings. Stroller and beginner friendly.",
+    "imageUrl": null,
+    "isSaved": true
+  },
+  {
+    "id": "5",
+    "name": "Lakelands Ridge Trail",
+    "location": "Stockbridge, MI",
+    "miles": 6.5,
+    "hours": 3.5,
+    "difficulty": "Moderate",
+    "elevationGainFt": 540,
+    "description": "Open meadows and oak savanna along an old rail corridor, with a side spur up to a ridge-top view of the Waterloo hills.",
+    "imageUrl": null,
+    "isSaved": false
+  },
+  {
+    "id": "6",
+    "name": "Waterloo-Pinckney Traverse",
+    "location": "Waterloo Recreation Area, MI",
+    "miles": 11.8,
+    "hours": 6.25,
+    "difficulty": "Hard",
+    "elevationGainFt": 1680,
+    "description": "A full-day point-to-point section of the long Waterloo-Pinckney trail through forest, marsh and steep moraine hills.",
+    "imageUrl": null,
+    "isSaved": false
+  }
+]

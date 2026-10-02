@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import ScreenLayout from '../../components/ScreenLayout';
@@ -6,29 +6,18 @@ import ScreenTitle from '../../components/ScreenTitle';
 import TrailSearchControls from '../../components/TrailSearchControls';
 import TrailCardList from '../../components/TrailCardList';
 import IconNavigation from '../../components/navigation/IconNavigation';
-
-// TEMPORARY PLACEHOLDER DATA:
-// Replace this array with the stored starred/saved trails when that data is ready.
-const temporarySavedTrails = [
-  { id: '1', name: 'Pine Ridge Loop', miles: 2.4, hours: 1, difficulty: 'Easy', isSaved: true },
-  { id: '2', name: 'Potawatomi Trail', miles: 5.2, hours: 2.5, difficulty: 'Moderate', isSaved: true },
-];
+import { useTrailFilter, useTrails } from '../../data/TrailsContext';
 
 export default function SavedPage() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedDifficulty, setSelectedDifficulty] = useState('All');
-
-  const filteredTrails = useMemo(() => {
-    const normalizedQuery = searchQuery.trim().toLowerCase();
-
-    return temporarySavedTrails.filter((trail) => {
-      const matchesSearch = trail.name.toLowerCase().includes(normalizedQuery);
-      const matchesDifficulty =
-        selectedDifficulty === 'All' || trail.difficulty === selectedDifficulty;
-
-      return matchesSearch && matchesDifficulty;
-    });
-  }, [searchQuery, selectedDifficulty]);
+  const { trails, isLoading, toggleSaved } = useTrails();
+  const savedTrails = useMemo(() => trails.filter((trail) => trail.isSaved), [trails]);
+  const {
+    filteredTrails,
+    searchQuery,
+    setSearchQuery,
+    selectedDifficulty,
+    setSelectedDifficulty,
+  } = useTrailFilter(savedTrails);
 
   return (
     <ScreenLayout footer={<IconNavigation />}>
@@ -42,7 +31,12 @@ export default function SavedPage() {
             onDifficultyChange={setSelectedDifficulty}
           />
         </View>
-        <TrailCardList trails={filteredTrails} emptyMessage="No saved trails found." />
+        <TrailCardList
+          trails={filteredTrails}
+          isLoading={isLoading}
+          emptyMessage="No saved trails found."
+          onToggleSaved={toggleSaved}
+        />
       </View>
     </ScreenLayout>
   );

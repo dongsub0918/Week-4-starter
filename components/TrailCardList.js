@@ -1,18 +1,35 @@
-import { FlatList, StyleSheet, Text } from 'react-native';
+import { ActivityIndicator, FlatList, StyleSheet, Text } from 'react-native';
 
 import TrailCard from './TrailCard';
 
 // Scrollable list of TrailCards shared by the Explore and Saved screens.
-// `onTrailPress` is optional; cards are not pressable without it.
-export default function TrailCardList({ trails, emptyMessage = 'No trails found.', onTrailPress }) {
+// `onTrailPress` and `onToggleSaved` are optional; without them the card and
+// its star are not pressable.
+export default function TrailCardList({
+  trails,
+  isLoading = false,
+  emptyMessage = 'No trails found.',
+  onTrailPress,
+  onToggleSaved,
+}) {
   return (
     <FlatList
       data={trails}
       keyExtractor={(trail) => trail.id}
       renderItem={({ item }) => (
-        <TrailCard trail={item} onPress={onTrailPress && (() => onTrailPress(item))} />
+        <TrailCard
+          trail={item}
+          onPress={onTrailPress && (() => onTrailPress(item))}
+          onToggleSaved={onToggleSaved && (() => onToggleSaved(item.id))}
+        />
       )}
-      ListEmptyComponent={<Text style={styles.emptyMessage}>{emptyMessage}</Text>}
+      ListEmptyComponent={
+        isLoading ? (
+          <ActivityIndicator color="#066B4C" />
+        ) : (
+          <Text style={styles.emptyMessage}>{emptyMessage}</Text>
+        )
+      }
       style={styles.list}
       contentContainerStyle={styles.listContent}
       keyboardShouldPersistTaps="handled"
