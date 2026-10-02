@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import ScreenLayout from '../../components/ScreenLayout';
+import ScreenTitle from '../../components/ScreenTitle';
 import TrailSearchControls from '../../components/TrailSearchControls';
 import IconNavigation from '../../components/navigation/IconNavigation';
 
@@ -32,7 +33,7 @@ export default function SavedPage() {
     <ScreenLayout footer={<IconNavigation />}>
       <View style={styles.content}>
         <View style={styles.fixedHeader}>
-          <Text style={styles.title}>Saved</Text>
+          <ScreenTitle>Saved</ScreenTitle>
           <TrailSearchControls
             searchQuery={searchQuery}
             onSearchQueryChange={setSearchQuery}
@@ -72,10 +73,5 @@ const styles = StyleSheet.create({
   },
   trailText: {
     color: '#212529',
-  },
-  title: {
-    paddingTop: 24,
-    fontSize: 24,
-    fontWeight: '700',
   },
 });

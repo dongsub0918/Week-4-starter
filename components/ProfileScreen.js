@@ -2,8 +2,8 @@
  * ProfileScreen.js
  * TrailMate: User Profile screen (Spec §D)
  *
- * Rendered by src/app/profile.js inside ScreenLayout, which supplies the top
- * padding and the IconNavigation footer.
+ * Rendered by src/app/profile.js inside ScreenLayout, which supplies the
+ * safe-area insets and the IconNavigation footer.
  */
 
 import React, { memo, useCallback, useState } from 'react';
@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
   // Identity
   identity: {
     alignItems: 'center',
-    paddingTop: space.lg, // 24 (+24 from ScreenLayout)
+    paddingTop: space.lg, // 24 below the safe-area inset (ScreenLayout)
     paddingBottom: space.lg, // 24
     gap: space.xxs, // 4
   },

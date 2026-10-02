@@ -1,5 +1,7 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { router } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Path, Svg } from 'react-native-svg';
 
 import ScreenLayout from '../../components/ScreenLayout';
@@ -20,10 +22,18 @@ function BackIcon() {
 }
 
 export default function TrailDetailPage() {
+  const insets = useSafeAreaInsets();
+
   return (
-    <ScreenLayout screenStyle={styles.screen} footer={<TrailDetailFooter />}>
+    <ScreenLayout edgeToEdge footer={<TrailDetailFooter />}>
+      <StatusBar style="light" />
       <View style={styles.page}>
-        <View style={styles.header}>
+        <View
+          style={[
+            styles.header,
+            { height: HEADER_HEIGHT + insets.top, paddingTop: 24 + insets.top },
+          ]}
+        >
           <Pressable
             accessibilityRole="button"
             accessibilityLabel="Go back to homepage"
@@ -41,18 +51,16 @@ export default function TrailDetailPage() {
   );
 }
 
+// Header height below the status bar; the top inset is added at render time.
+const HEADER_HEIGHT = 136;
+
 const styles = StyleSheet.create({
-  screen: {
-    paddingTop: 0,
-  },
   page: {
     flex: 1,
     width: '100%',
   },
   header: {
-    height: 136,
     width: '100%',
-    paddingTop: 24,
     paddingHorizontal: 24,
     paddingBottom: 0,
     flexDirection: 'column',
