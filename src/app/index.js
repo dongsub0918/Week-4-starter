@@ -1,4 +1,5 @@
 import { StyleSheet, View } from 'react-native';
+import { router } from 'expo-router';
 
 import ScreenLayout from '../../components/ScreenLayout';
 import ScreenTitle from '../../components/ScreenTitle';
@@ -32,11 +33,16 @@ export default function HomePage() {
         <TrailCardList
           trails={filteredTrails}
           isLoading={isLoading}
+          onTrailPress={openTrail}
           onToggleSaved={toggleSaved}
         />
       </View>
     </ScreenLayout>
   );
+}
+
+function openTrail(trail) {
+  router.push({ pathname: '/trail/[id]', params: { id: trail.id } });
 }
 
 const styles = StyleSheet.create({
