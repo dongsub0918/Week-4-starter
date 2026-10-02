@@ -1,35 +1,10 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
-import { Polygon, Svg } from 'react-native-svg';
 
-const DIFFICULTY_COLORS = {
-  Easy: '#3B8C4F',
-  Moderate: '#F9A800',
-  Hard: '#D64535',
-};
+import DifficultyBadge from './DifficultyBadge';
+import StarIcon from './StarIcon';
+import { formatDuration } from './formatTrail';
 
-const STAR_COLOR = '#F9A800';
 const IMAGE_SIZE = 120;
-
-// 2.25 -> "2h 15m"
-const formatDuration = (hours) => {
-  const totalMinutes = Math.round(hours * 60);
-  return `${Math.floor(totalMinutes / 60)}h ${totalMinutes % 60}m`;
-};
-
-function StarIcon({ filled }) {
-  return (
-    <Svg width={24} height={24} viewBox="0 0 24 24">
-      <Polygon
-        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
-        fill={filled ? STAR_COLOR : 'none'}
-        stroke={filled ? STAR_COLOR : '#495057'}
-        strokeWidth={1.75}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </Svg>
-  );
-}
 
 export default function TrailCard({ trail, onPress, onToggleSaved }) {
   const { name, miles, hours, difficulty, imageUrl, isSaved = false } = trail;
@@ -53,9 +28,7 @@ export default function TrailCard({ trail, onPress, onToggleSaved }) {
         <Text style={styles.name} numberOfLines={2}>
           {name}
         </Text>
-        <View style={[styles.badge, { backgroundColor: DIFFICULTY_COLORS[difficulty] }]}>
-          <Text style={styles.badgeLabel}>{difficulty}</Text>
-        </View>
+        <DifficultyBadge difficulty={difficulty} />
         <Text style={styles.meta}>
           {miles} mi • {duration}
         </Text>
@@ -112,18 +85,6 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: '700',
     lineHeight: 28,
-  },
-  badge: {
-    height: 32,
-    paddingHorizontal: 24,
-    justifyContent: 'center',
-    borderRadius: 16,
-  },
-  badgeLabel: {
-    color: '#FFF',
-    fontSize: 16,
-    fontWeight: '500',
-    lineHeight: 24,
   },
   meta: {
     color: '#495057',
